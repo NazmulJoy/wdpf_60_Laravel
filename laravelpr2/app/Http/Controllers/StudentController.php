@@ -25,5 +25,22 @@ class StudentController extends Controller
 
        return redirect(route('student.index'))->with('msg', 'Student has been created');
     }
+    function destroy(Request $request){
+        $student  = Student::find($request->id);
+        $student->delete();
+         return redirect(route('student.index'))->with('msg', 'Student have been deleted');
+    }
+    function edit(Request $request){
+        $student  = Student::find($request->id);
+        return view('student/edit', ['student' => $student]); 
+    }
+    function update(Request $request){
+        $student  = Student::find($request->id);
+        $student['name'] = $request->input('name'); 
+       $student['email'] = $request->input('email'); 
+       $student['phone'] = $request->input('phone'); 
+        $student->update();
 
+       return redirect(route('student.index'))->with('msg', 'Student has been updated');
+    }
 }
