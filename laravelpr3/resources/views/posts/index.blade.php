@@ -28,9 +28,9 @@
             <td>
                 <form action="{{route('posts.destroy',$post->id)}}" method="POST">
    
-                    {{-- <a class="btn btn-dark" href="{{ route('posts.show',$post->id) }}">Show</a> --}}
+                    <a class="btn btn-dark" href="{{ route('posts.show',$post->id) }}">Show</a>
     
-                    {{-- <a class="btn btn-primary" href="{{ route('edit',$post->id) }}">Edit</a> --}}
+                    <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
