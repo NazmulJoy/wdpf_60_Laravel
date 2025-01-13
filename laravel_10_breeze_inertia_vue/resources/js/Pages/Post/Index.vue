@@ -2,12 +2,15 @@
     <div class="container">
         <h1 class="display-1">Welcome to Vue with Laravel</h1>
         <table class="table table-bordered">
-            <tr>
+            <thead>
+                <tr>
                 <th>Title</th>
                 <th>Body</th>
                 <th>Action</th>
             </tr>
-            <tr v-for="x in posts" :key="x.id">
+            </thead>
+            <tbody>
+                <tr v-for="x in posts" :key="x.id">
                 <td>{{ x.title }}</td>
                 <td>{{ x.body }}</td>
                 <td>
@@ -18,6 +21,7 @@
                         ><i class="fa fa-edit" aria-hidden="true"></i></Link>
                 </td>
             </tr>
+            </tbody>
         </table>
         <br />
     <Link
