@@ -1,7 +1,7 @@
 <template>
   <div class="container">
        <br>
-  <form @submit.prevent="this.submit" class="form">
+  <form @submit.prevent="submit" class="form">
                             <div class="mb-4 form-group">
                                 <label 
                                     for="name" 
@@ -12,7 +12,7 @@
                                     class="form-control" 
                                     placeholder="Enter Name" 
                                     id="name"
-                                    v-model="name"
+                                    v-model="form.name"
                                      />
 
                             </div>
@@ -24,7 +24,7 @@
                                     Address:</label>
                                 <textarea 
                                     class="form-control" id="address" 
-                                     v-model="address"
+                                     v-model="form.address"
                                     placeholder="Enter Address"></textarea>
                             </div>
                             <div class="mb-4 form-group">
@@ -37,7 +37,7 @@
                                     class="form-control" 
                                     placeholder="Enter Date of Birth"  
                                     id="dob"
-                                     v-model="dob"
+                                     v-model="form.dob"
                                      />
                             </div>
                             <div class="mb-4 form-group">
@@ -51,7 +51,7 @@
                                      name="gender"
                                     id="gender1"
                                     value="male"
-                                     v-model="gender"
+                                     v-model="form.gender"
                                      />Male &nbsp;
                                      <input 
                                     type="radio" 
@@ -59,7 +59,7 @@
                                      name="gender"
                                     id="gender2"
                                     value="female"
-                                     v-model="gender"
+                                     v-model="form.gender"
                                      />Female
                             </div>
                             <div class="mb-4 form-group">
@@ -67,7 +67,7 @@
                                     for="district" 
                                     class="block text-gray-700 text-sm font-bold mb-2">
                                     District:</label>
-                                    <select class="form-control" name="" id="district"  v-model="district">
+                                    <select class="form-control" name="" id="district"  v-model="form.district">
                                       <option disabled value="">Select one</option>
                                       <option>Dhaka</option>
                                       <option>Narayanganj</option>
@@ -77,40 +77,40 @@
                             </div>
                             <div class="mb-4 form-group">
                                 <label 
-                                    for="langauge" 
+                                    for="languages" 
                                     class="block text-gray-700 text-sm font-bold mb-2">
                                     Language:</label>
                                 <input 
                                     type="checkbox" 
                                     class="form-control" 
-                                    name="language"
+                                   
                                    
                                     value="PHP"
-                                     v-model="language"
+                                     v-model="form.languages"
                                      /> PHP &nbsp;
                                      <input 
                                     type="checkbox" 
                                     class="form-control" 
-                                    name="language"
+                                    
                                     
                                     value="Javascript"
-                                     v-model="language"
+                                     v-model="form.languages"
                                      /> Javascript &nbsp;
                                      <input 
                                     type="checkbox" 
                                     class="form-control" 
-                                    name="language3"
+                                   
                                    
                                     value="Laravel"
-                                     v-model="language"
+                                     v-model="form.languages"
                                      /> Laravel &nbsp;
                                      <input 
                                     type="checkbox" 
                                     class="form-control" 
-                                    name="language"
+                                    
                                   
                                     value="React"
-                                     v-model="language"
+                                     v-model="form.languages"
                                      /> React
                             </div>
                             <div class="mb-4 form-group">
@@ -118,13 +118,7 @@
                                     for="photo" 
                                     class="block text-gray-700 text-sm font-bold mb-2">
                                     Photo:</label>
-                                <input 
-                                    type="file" 
-                                    class="form-control" 
-                                    name="photo" 
-                                    id="photo"
-                                    
-                                     />
+                                    <input type="file" @input="form.photo = $event.target.files[0]" />
                             </div>
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 text-white">
                                 Submit
@@ -134,8 +128,8 @@
                     </div>
 </template>
 
-<!-- <script setup>
-import {useForm,Link} from '@inertiajs/vue3';
+<script setup>
+import {useForm} from '@inertiajs/vue3';
 
     const form = useForm({
         name: '',
@@ -143,38 +137,15 @@ import {useForm,Link} from '@inertiajs/vue3';
         address: '',
         gender: '',
         district: '',
-        language: [],
-        photo: '',
+        languages: [],
+        photo: null,
     })
     const submit = () => {
-  form.student("/students");
+  form.post("/students");
 };
-</script> -->
-<script>
-export default {
-    data(){
-        return{
-            name : "",
-            address: "",
-            dob: "",
-            gender: "",
-            language: [],
-            district: "",
-           
-        }
-    },
-    methods: {
-        Submit(){
-          axios.post(route('students.store'),{name:this.name,address:this.address,dob:this.dob,gender:this.gender,language:this.language,district:this.district})
-
-        }
-    }
-}
 </script>
-<script setup>
-import axios from 'axios';
 
-</script>
+
 <style>
 
 </style>

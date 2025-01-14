@@ -15,7 +15,7 @@ class Student extends Model
         'address',
         'gender',
         'district',
-        'language',
+        'languages',
         
     ];
 

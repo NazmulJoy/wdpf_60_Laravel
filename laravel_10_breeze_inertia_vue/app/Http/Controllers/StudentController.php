@@ -30,9 +30,18 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $student = new Student($request->all());
-        $student->save();
-
-        return redirect()->route('students.create');
+        $languages = json_encode($request->languages);
+        $student['languages'] = $languages;
+        // return $student;
+        
+        if ($image = $request->file('photo')) {
+            $destinationPath = 'images/';
+            $postImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $postImage);
+            $student['photo'] = "$postImage";
+        }
+            $student->save();
+        return redirect()->route('students.index');
     }
 
     /**
@@ -64,6 +73,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->back();
     }
 }
